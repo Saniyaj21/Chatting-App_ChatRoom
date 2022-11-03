@@ -1,0 +1,533 @@
+{% extends 'main.html' %}
+
+
+{% block body %}
+
+
+
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+            background: white;
+            
+        }
+
+        
+/* Track */
+::-webkit-scrollbar-track {
+    background: transparent;
+    border-left: 1px solid green;
+    
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: green;
+    
+    border: 0px;
+   
+}
+
+        .main {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            height: 86vh;
+            border-bottom: 1px solid green;
+           
+            
+        }
+        a{
+            border: 0px;
+        }
+        .headline {
+            color: white;
+            position: sticky;
+            top: 0px;
+            font-size: 20px;
+            background-color: rgba(7,131,90,0.18);
+            width: 100%;
+            height: 30px;
+        }
+        .headline-message {
+            color: green;
+            position: sticky;
+            top: 0px;
+            
+            background-color: rgba(7,131,90,0.18);
+            width: 100%;
+            height: 50px;
+        }
+        .headline-message h5{
+            
+            font-size: 16px;
+            padding: 3px;
+            margin: 0px;
+            font-weight: 500;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        .space{
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        
+            float: right;
+            font-weight: 500;
+            width: 50%;
+            
+            overflow: hidden;
+        }
+            
+        
+
+        .headline h5 {
+            font-size: 20px;
+            text-align: center;
+            font-weight: 200;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        .left {
+            
+            margin: 2px;
+            width: 100%;
+            overflow: hidden;
+            overflow-y: scroll;
+            border-right: 1px solid green;
+            background-color: rgba(7,131,90,0.18);
+            
+
+        }
+
+        .middle {
+            
+            margin: 2px;
+            
+            background-color: rgba(7,131,90,0.18);
+            overflow: hidden;
+            overflow-y: scroll;
+            border-right: 1px solid green;
+            padding-bottom: 10px;
+        }
+
+        .right {
+            background-color: rgba(7,131,90,0.18);
+            margin: 2px;
+            overflow: hidden;
+            overflow-y: scroll;
+        }
+
+        .rooms-list {
+            background: transparent;
+            margin: 5px;
+        } 
+
+        .room-name {
+            margin: 5px;
+            height: 40px;
+
+        }
+        .room-link{
+            width: 20px;
+        }
+
+        .btn-room {
+            width: 75%;
+            height: 100%;
+        }
+
+
+
+        .btn-delete {
+            width: 20%;
+            float: right;
+            height: 100%;
+        }
+
+        .dp {
+            height: 40px;
+            width: 40px;
+           
+            border-radius: 50%;
+            float: right;
+            
+        }
+
+        .dp img {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+
+        }
+
+        .circle-btn:focus {
+            outline: 0px;
+        }
+
+        /* message part */
+        .single-message-userNow{
+            background-color: #DCF8C6;
+            color: black;
+            margin: 5px 0px;
+            margin-left: 30%;
+            text-align: end;
+            width: 70%;
+            padding-right: 10px;
+            
+            border: 1px solid #066042;
+            border-radius: 15px 4px 15px 15px;
+            
+        }
+        .single-message{
+           
+            background-color: white;
+            color: black;
+            margin: 5px 0px;
+            margin-right: 30%;
+            
+            width: 70%;
+            padding-left: 10px;
+            
+            border: 1px solid #066042;
+            border-radius: 4px 15px 15px 15px;
+        }
+        .message-info{
+            
+            font-size: 14px;
+            color: goldenrod;
+            font-weight: 400;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            
+        }
+        .message-info a{
+            text-decoration: none;
+            margin-left: 20px;
+            margin-right: 60px;
+            color: #330000;
+            font-weight: 400;
+            
+        }
+        .message-info a:hover{
+            color: #ff0000;
+        }
+        .message-body{
+            
+            
+            
+            padding: 0px 5px;
+            
+
+        }
+        .message-sendtime{
+        color: gray;
+            font-size: 12px;
+            font-weight: 400;
+            width: 200px;
+            text-align: end;
+            display: inline-block;
+            
+        }
+
+        
+        
+        .send-message input{
+          position: fixed;
+          bottom: 15px;
+          display: block;
+          margin-left:75px ;
+          width: 450px;
+          height: 30px;
+          border: 2px solid green;
+          border-radius: 10px;
+
+        }
+        .send-message input:focus{
+            outline: green;
+        }
+        .send-message input::placeholder{
+            text-align: center;
+            color: #066042;
+            font-size: 18px;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+        .join-room{
+          width: 100%;
+          text-align: center;
+        }
+        .join-room a{
+          text-decoration: none;
+        }
+
+    </style>
+
+
+
+    <div class="main">
+
+
+
+        <!-- All joined room part -->
+
+        <div class="left">
+            <div class="rooms-list">
+                <div class="headline">
+                    <h5>Your Rooms</h5>
+                </div>
+
+
+                <!-- loop from here -->
+
+                {% for rooms in allRooms %}
+      
+                {% if rooms.host == request.user %}
+    
+                
+                <!-- first room -->
+                <div class="room-name">
+
+                    <a class="room-link" href="{% url "chat" rooms.id %}">
+
+
+                        <button class="btn-room btn btn-outline-success btn-sm">{{rooms}}</button>
+                    </a>
+
+                    <a class="room-delete-link" href="{% url 'delete-room' rooms.id %}"><button
+                            class="btn-delete btn btn-outline-success btn-sm">delete</button></a>
+                    
+                
+                </div>
+
+                <!-- 2nd room -->
+                {% elif request.user in rooms.participents.all %}
+                <div class="room-name">
+
+                    <a class="room-link" href="{% url "chat" rooms.id %}">
+
+
+                        <button class="btn-room btn btn-outline-success btn-sm">{{rooms}}</button>
+                    </a>
+                    
+                </div>
+
+                {% endif %}
+     
+            {% endfor %}
+
+
+
+
+            </div>
+
+        </div>
+
+
+
+
+        <!-- message part -->
+
+        <div class="middle">
+            <div class="rooms-list">
+                <div class="headline-message">
+                    <h5>Room ID : {{room_id}} <span class="space">Room Name : {{room.name}} </span></h5>
+                    {% if request.user == room.host %}
+                    <h5>Room Password : {{room_password}} </h5>
+                    {% endif %}
+                    
+                </div>
+
+                <!-- first message -->
+                <!-- if user is host -->
+
+                
+                
+                
+                
+                
+                {%if request.user == room.host %}
+                {%for message in room_messages %}
+
+
+                
+                {% if request.user == message.user %}
+
+                <div class="single-message-userNow">
+                    <div class="message-info">
+                        
+                      {{message.user | upper}}
+                        {% if request.user == message.user %}
+                        <a href="{% url 'delete-message' message.id %}">Delete</a>
+                        {% endif  %}
+                        <div class="message-sendtime">
+                            {{message.created|timesince}} ago
+                          </div>
+                    </div>
+                    <div class="message-body">
+                      {{message.body}}
+                    </div>
+                    
+                  </div>
+
+
+
+                  
+                  {% else  %}
+                  <div class="single-message">
+                    <div class="message-info">
+                      {{message.user | upper}}
+                        {% if request.user == message.user %}
+                        <a href="{% url 'delete-message' message.id %}">Delete</a>
+                        {% endif %}
+                        <div class="message-sendtime">
+                            {{message.created|timesince}} ago
+                          </div>
+                    </div>
+                    <div class="message-body">
+                      {{message.body}}
+                    </div>
+                    
+                    
+
+                </div>
+                {%endif%}
+                  {% endfor %}
+                
+
+                  {%else %}
+              
+              
+                  {% for participant in participents %}
+
+                  {% if participant == request.user %}
+                    {%for message in room_messages %}
+
+                    {% comment %} {% if request.user == message.user %}  {% endcomment %}
+
+                    {% if request.user == message.user %}
+
+                    <div class="single-message-userNow">
+                        <div class="message-info">
+                          {{message.user | upper}}
+                            {% if request.user == message.user %}
+                            <a href="{% url 'delete-message' message.id %}">Delete</a>
+                            {% endif  %}
+                            <div class="message-sendtime">
+                                {{message.created|timesince}} ago
+                              </div>
+                        </div>
+                        <div class="message-body">
+                          {{message.body}}
+                        </div>
+                        
+                      </div>
+                      {% else  %}
+
+
+                <!-- second message -->
+                <!-- if user is not host -->
+                <div class="single-message">
+                    <div class="message-info">
+                      {{message.user | upper}}
+                        {% if request.user == message.user %}
+                        <a href="{% url 'delete-message' message.id %}">Delete</a>
+                        {% endif %}
+                        <div class="message-sendtime">
+                            {{message.created|timesince}} ago
+                          </div>
+                    </div>
+                    <div class="message-body">
+                      {{message.body}}
+                    </div>
+                    
+                    
+
+                </div>
+                 {% endif  %}  
+
+                {%endfor%}
+
+
+        {% endif %}
+      {%endfor%}
+
+    {% endif %}
+
+   {% comment %} sending message {% endcomment %}
+
+
+    {% if request.user == room.host or request.user in participents %}
+        
+    <form action="" method="POST" class="send-message">
+      {% csrf_token%}
+      <input type="text" name="body" placeholder="Write message and press Enter" />
+    </form>
+
+  {% else %}
+  
+  
+  <div class="join-room">
+    
+    <a  href="{% url 'joinRoom' %}"><button class=" btn btn-success btn-sm">Join Room</button></a>
+  </div>
+
+  {% endif %}
+            
+            </div>
+        </div>
+
+     <!-- Participants part -->
+
+        <div class="right">
+            <div class="rooms-list">
+                <div class="headline">
+                    <h5>Participents</h5>
+                </div>
+
+             
+                <!-- first Participents -->
+                {% if request.user  in participents %}
+                {% for userp in participents %}
+                {%if userp == room.host    %}
+
+                <div class="room-name">
+
+                    <a class="room-link" href="{% url 'profile' userp.id %}">
+                        <button class="btn-room btn btn-outline-success btn-sm">{{userp.username}} HOST</button>
+                    </a>
+
+
+                    <a class="dp" href="{% url 'profile' userp.id %}">
+                        <img src="{{userp.profile.dp.url}}" alt="">
+                    </a>
+
+                </div>
+                {% endif %}
+    {%endfor%}
+    {% endif %}
+                <!-- second Participents -->
+
+                {% if request.user  in participents %}
+    {% for userp in participents %}
+    {%if userp != room.host    %}
+                <div class="room-name">
+
+                    <a class="room-link" href="{% url 'profile' userp.id %}">
+                        <button class="btn-room btn btn-outline-success btn-sm">{{userp.username}}</button>
+                    </a>
+
+
+                    <a class="dp" href="{% url 'profile' userp.id %}">
+                        <img src="{{userp.profile.dp.url}}" alt="">
+                    </a>
+
+                </div>
+                {% endif %}
+    {%endfor%}
+    {% endif %}
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock body %}

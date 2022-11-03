@@ -1,0 +1,324 @@
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            background: transparent;
+            border-radius: 2px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border: 1px solid #07855b;
+            background: #07855b;
+            border-radius: 2px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #066042;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        #containerLeft {
+            height: 85vh;
+            
+            width: 30%;
+            position: fixed;
+            left: 0;
+            top: 60px;
+            padding: 5px 0px;
+            /* overflow: hidden; */
+            /* overflow-y: scroll; */
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+
+        #containerLeft #roomType {
+            width: 100%;
+            /* background-color: #b6b6b6; */
+            padding: 5px;
+            margin-top: 3px;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+
+        #containerLeft #roomType button {
+            background-color: #07855b;
+            width: 40%;
+            height: 38px;
+            border: none;
+            border-radius: 10px;
+            outline: none;
+            transition: 0.5s;
+        }
+
+        #containerLeft #roomType button:hover {
+            background-color: #179f72;
+            /* border: 2px solid #07855b; */
+            border-radius: 15px;
+            box-shadow: 0px 0px 3px #07855b;
+        }
+
+        #containerLeft #roomType button a {
+            color: #f2fffb;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        #containerLeft #roomLists {
+            top: 65px;
+            /* background-color: #f2fffb; */
+            position: relative;
+            width: 90%;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            left: 50%;
+            transform: translateX(-50%);
+            overflow: hidden;
+            overflow-y: scroll;
+            height: 95%;
+            border: none;
+            border-radius: 15px;
+            bottom: 0;
+        }
+
+
+        #containerLeft #roomLists #roomDetailsBoxOut{
+            width: 100%;
+            background-color: #07855b;
+            height: 60px;
+            border: none;
+            border-radius: 15px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin: 8px 0px;
+        }
+
+
+        #containerLeft #roomLists #roomDetailsBox {
+            width: 100%;
+            background-color: #07855b;
+            height: 60px;
+            border: none;
+            border-radius: 15px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        #containerLeft #roomLists #roomDetailsBox img {
+            height: 50px;
+            width: 50px;
+            margin-left: 15px;
+            margin-right: 8px;
+            top: 50%;
+            /* transform: translateY(-50%); */
+            border: none;
+            border-radius: 50%;
+        }
+
+        #containerLeft #roomLists #roomDetailsBox #roomDetails {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            /* width: 77%; */
+            align-items: flex-start;
+            justify-content: center;
+            overflow-x: hidden;
+            border: none;
+            border-radius: 10px;
+            padding-left: 10px;
+            color: #fff;
+            background-color: #07855b;
+            width: 100% !important;
+        }
+
+        #containerLeft #roomLists #roomDetailsBox #roomDetails #roomName {
+            font-size: 18px;
+            font-family: poppins !important;
+            font-weight: 500;
+        }
+
+        #containerLeft #roomLists #roomDetailsBox #roomDetails #chatDetails {
+            font-size: 13px;
+            font-family: poppins !important;
+            font-weight: 200;
+        }
+
+        #roomListsA {
+            text-decoration: none;
+            width: 95% !important;
+        }
+
+        #containerLeft #roomLists #roomDetailsBoxOut #deleteOption{
+            background-color: transparent;
+            columns: #ddd;
+            font-size: 18px;
+            outline: none;
+            border: none;
+            display: none;
+            transition: 0.5s;
+            /* left: -20px; */
+            right: 20px;
+            position: relative;
+        }
+
+        #containerLeft #roomLists #roomDetailsBoxOut:hover #deleteOption{
+            display: block;
+        }
+
+        #containerLeft #roomLists #roomDetailsBoxOut #deleteOption a{
+            color: #f1f1f1;
+            text-decoration: none;
+            transition: 0.5s;
+        }
+
+        #containerLeft #roomLists #roomDetailsBoxOut #deleteOption a:hover{
+            color: #e07e7e;
+        }
+
+
+        #containerRight {
+            position: fixed;
+            width: 72%;
+            height: 92vh;
+            padding: 0px 50px;
+            
+            
+            right: 0;
+            top: 90px;
+            z-index: 0;
+            overflow: hidden;
+            overflow-y: scroll; */
+            
+        }
+        #containerRight h2{
+            text-align: center;
+            position: relative;
+            top: 150px;
+        }
+    </style>
+
+    {% extends 'main.html' %}
+
+{% block body %}
+
+
+
+    <div id="containerLeft">
+
+        <div style="position: fixed;width: 28.8%;z-index: 99999;">
+            <div id="roomType">
+                <button><a href="{% url 'create-room' %}"><i class="fa-solid fa-pen"></i> Create Room</a></button>
+                <button style="margin-left: 15px;"><a href="{% url 'joinRoom' %}"><i class="fa-solid fa-user-plus"></i> Join
+                        Room</a></button>
+            </div>
+        </div>
+
+        <div id="roomLists">
+
+            
+            <h4> Search Result </h4>
+            {% for log in rooms %}
+
+            <div id="roomDetailsBoxOut">
+                <a href="{% url 'chat' log.id %}" id="roomListsA">
+                    <div id="roomDetailsBox">
+                        {% comment %} <img src="avatarDefault.png" alt="Icon"> {% endcomment %}
+                        <div id="roomDetails">
+                            <span id="roomName">{{log.name}}</span>
+                            <span id="chatDetails">Last Chat Details</span>
+                        </div>
+                    </div>
+                </a>
+                {% if request.user == log.host %}
+                <button id="deleteOption"><a href="{% url 'delete-room' log.id %}"><i class="fa-solid fa-trash"></i></a></button>
+                {% endif %}
+            </div>
+
+            {% endfor %}
+            <hr>
+
+
+            {% for log in room %}
+            {% if forloop.counter < 15 %}
+            <div id="roomDetailsBoxOut">
+                <a href="{% url 'chat' log.id %}" id="roomListsA">
+                    <div id="roomDetailsBox">
+                        {% comment %} <img src="avatarDefault.png" alt="Icon"> {% endcomment %}
+                        <div id="roomDetails">
+                            <span id="roomName">{{log.name}}</span>
+                            <span id="chatDetails">Last Chat Details</span>
+                        </div>
+                    </div>
+                </a>
+                {% if request.user == log.host %}
+                <button id="deleteOption"><a href="{% url 'delete-room' log.id %}"><i class="fa-solid fa-trash"></i></a></button>
+                {% endif %}
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+
+
+    </div>
+
+
+   <div id="containerRight">
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        <div class="col">
+          <div class="card border-success bg-transparent ">
+            
+            <div class="card-body">
+              <h5 class="card-title">What is Room?</h5>
+              <p class="card-text">Rooms are nothing but like a whatssApp group.Click on any room inside you will find all rooms you are joined. </p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card border-success bg-transparent">
+            
+            <div class="card-body">
+              <h5 class="card-title">How to create Room?</h5>
+              <p class="card-text">Find a button called create room click on it, enter your room name and set password.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card border-success bg-transparent">
+            
+            <div class="card-body">
+              <h5 class="card-title">How to join Room</h5>
+              <p class="card-text">There is a Join Room button click on it and enter valid room id and password.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col ">
+          <div class="card border-success bg-transparent">
+            
+            <div class="card-body">
+              <h5 class="card-title">How to join public Rooms?</h5>
+              <p class="card-text">Any one can create public rooms with any name but we suggest that set the room password 'public' it will help everyone to join that public room.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    {% endblock body %}

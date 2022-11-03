@@ -1,0 +1,78 @@
+{% extends 'main.html' %}
+
+{% block body %}
+
+<style>
+    body {
+        background-color: rgba(7, 131, 90, 0.18);
+       
+        
+    }
+    
+    h6 {
+        text-align: center;
+        position: relative;
+        font-family: 'Times New Roman', Times, serif;
+        top: 5px;
+
+    }
+    p{
+        text-align: justify;
+    }
+
+    
+
+    .index-box {
+       
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
+
+<div class="container">
+    <h6>This Application is not Responsive now! Open <span class="highlight">Desktop Site</span> in your Browser for
+        better experience.</h6>
+
+    <div class="index-box">
+        <div class="first-row">
+
+            <div class="card text-center m-4" style="width: 25rem;">
+                <div class="card-body">
+                    <h5 class="card-title text-success">Chat</h5>
+                    <p class="card-text fs-6 ">This application gives you top level privecy. Also you can find public Rooms and join there.</p>
+                    <a href="{% url 'home'%}" class="btn btn-outline-success">Explore More</a>
+                </div>
+            </div>
+            <div class="card text-center m-4" style="width: 25rem;">
+                <div class="card-body">
+                    <h5 class="card-title text-success">Games</h5>
+                    <p class="card-text">We are planning to add some logical game that we implement in proming laguages.For now this is a prototype.</p>
+                    <a href="{% url 'games'%}" class="btn btn-outline-success">Explore More</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="second-row">
+
+            <div class="card text-center m-4" style="width: 25rem;">
+                <div class="card-body">
+                    <h5 class="card-title text-success">Development </h5>
+                    <p class="card-text">We are a group of two junior developer.We used HTML, CSS, Bootstrap, Python, Django, SQLite for this application.</p>
+                    <a href="{% url 'devolopers'%}" class="btn btn-outline-success">Explore More</a>
+                </div>
+            </div>
+            <div class="card text-center m-4 " style="width: 25rem;">
+                <div class="card-body">
+                    <h5 class="card-title text-success">Your Feedback</h5>
+                    <p class="card-text">Share your experience with us to help and inprove this application. Any type suggestion will be appriciated.</p>
+                    <a href="{% url 'feedback'%}" class="btn btn-outline-success">Explore More</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    {% endblock body %}

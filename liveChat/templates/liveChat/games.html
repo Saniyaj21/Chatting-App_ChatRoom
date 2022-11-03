@@ -1,0 +1,104 @@
+{% extends 'main.html' %}
+
+{% block body %}
+
+<style>
+    body {
+        background-color: rgba(7, 131, 90, 0.18);
+       
+        
+    }
+    
+    .form_box{
+        width: 50%;
+        margin-left: 24%;
+        margin-top: 50px;
+    }
+    .room-page-title{
+        text-align: center;
+        margin-top: 40px;
+    }
+    .num-box{
+        margin-top: 50px;
+    }
+</style>
+
+<div class="form_box">
+<h4 class="room-page-title text-success">Check even number in a range</h4>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Enter Number</label>
+      <input type="number"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="number" placeholder="Enter a number ">
+      
+    </div>
+   
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+{% comment %} logic for odd even number {% endcomment %}
+ 
+<div class="num-box">
+    
+    {% if length != 0 %}
+    
+    {% for num in numberlist %}
+    {% if num|divisibleby:2 %}
+    
+    <span >
+        {{num}}
+    </span>
+    
+    
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+</div>    
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} <h2> Games page </h2>
+
+
+ <h3>Check even or odd number in a range</h3>
+<form action="" method="POST">
+    {% csrf_token %}
+
+    <input type="number" name="number" placeholder="Enter a number ">
+    <input type="submit" value="Submit">
+
+</form> {% endcomment %}
+
+{% comment %} {% if length != 0 %}
+
+{% for num in numberlist %}
+{% if num|divisibleby:2 %}
+
+<span >
+    {{num}}
+</span>
+
+
+{% endif %}
+{% endfor %}
+{% endif %} {% endcomment %}
+
+{% endblock body %}

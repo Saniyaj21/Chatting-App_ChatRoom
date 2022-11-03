@@ -1,0 +1,159 @@
+{% extends 'main.html' %}
+
+{% block body %}
+
+<style>
+    .login-box{
+
+        width: 40%;
+        margin-left: 29%;
+        margin-top: 50px;
+    }
+    p{
+        margin-top: 50px;
+    }
+    a{
+        text-decoration: none;
+    }
+    #form-input1{
+        border: 1px solid green;
+        height: 35px;
+        font-size: 18px;
+        border-radius: 5px;
+        display: inline-block;
+        width: 100%;
+        margin-top: 10px;
+    }
+    #id_password1{
+        width: 100%;height: 35px;
+        font-size: 18px;
+        margin-top: 10px;
+        border: 1px solid green;
+        border-radius: 5px;
+        display: inline-block;
+    }
+    #id_password2{
+        width: 100%;
+        height: 35px;
+        font-size: 18px;
+        margin-top: 10px;
+        margin-bottom: 15px;
+        border: 1px solid green;
+        border-radius: 5px;
+        display: inline-block;
+    }
+    #id_password1:focus{
+        outline: 1px solid green;
+    }
+    #id_password2:focus{
+        outline: 1px solid green;
+    }
+    #form-input1:focus{
+        outline: 1px solid green;
+    }
+   
+    
+</style>
+
+
+
+<div class="login-box">
+    
+    {% if page == 'login'%}
+    
+<form method="POST" action ="">
+    {% csrf_token %}
+
+    <div class="mb-3">
+      <label for="exampleInputEmail1"  class="form-label">Username</label>
+      <input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+    </div>
+   
+    <button type="submit" class="btn btn-outline-success  button-css">Login</button>
+  </form>
+  <p class="text-center">Haven't sign up yet? 
+    <a class="text-success" href="{% url 'register' %}">Register Now</a></p>
+  {% else %}
+    
+  
+  
+  <div class="form-box" >
+     <form method="POST" action ="" >
+        {% csrf_token %}
+        <label for="form-imput1">UserName</label>
+        {{form.username}}
+        <label for="id_password1">Password</label>
+        {{form.password1}}
+        <label for="id_password2">Confirm Password</label>
+        {{form.password2}}
+    
+        <input type="submit" class="btn btn-outline-success button-css" value="Register">
+     </form> 
+        
+
+     <p class="text-center">Already Sign Up? 
+        <a class="text-success" href="{% url 'login' %}">Log In Here</a></p>
+
+    {% comment %} <p>already sign up</p>
+    <a href="{% url 'login'%}">Sign up</a> {% endcomment %}
+   </div>
+
+
+
+
+  
+  
+</div>
+{% endif %}
+{% endblock body %}
+
+
+
+
+
+
+
+{% comment %} 
+
+
+
+
+{% if page == 'login'%}
+
+<div class="login-box">
+    <form method="POST" action ="">
+
+
+
+        {% csrf_token %}
+        <label for="username">Username</label>
+        <input type="text" name="username" placeholder="Enter User name..">
+        <label for="password">Password</label>
+        <input type="text" name="password" placeholder="Enter Password..">
+
+        <input type="submit" value="Submit">
+    </form> 
+    <p>Haven't sign up yet?</p>
+    <a href="{% url 'register' %}">Register</a>
+    
+</div>
+{% else %}
+<div>
+    <form method="POST" action ="">
+        {% csrf_token %}
+        {{form.as_p}}
+        
+        <input type="submit" value="Register">
+    </form> 
+        
+
+    <p>already sign up</p>
+    <a href="{% url 'login'%}">Sign up</a>
+</div>
+{% endif %}
+{% endblock body %} {% endcomment %}

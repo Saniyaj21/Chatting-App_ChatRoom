@@ -1,0 +1,42 @@
+{% extends 'main.html' %}
+
+{% block body %}
+
+<!-- Total Rooms {{room_count}} -->
+
+<hr>
+<a href="{% url 'create-room' %}">Create Room</a>
+<a href="{% url 'joinRoom' %}">Join Room</a>
+<hr>
+
+<h2>Search Result </h2>
+
+{% for log in rooms %}
+<div>
+    <a href="{% url 'chat' log.id %}">{{log.name}}</a>
+
+</div>
+{% endfor %}
+
+<hr>
+
+
+
+<h3> All Rooms </h3>
+
+ {% for log in room %}
+<div>
+    {% if request.user == log.host %}
+          
+          <a href="{% url 'delete-room' log.id %}">Delete</a>
+          
+          <br>
+    {% endif %}
+    <a href="{% url 'chat' log.id %}">{{log.name}}</a>
+    <hr>
+
+</div>
+{% endfor %}
+
+
+{% endblock body %}

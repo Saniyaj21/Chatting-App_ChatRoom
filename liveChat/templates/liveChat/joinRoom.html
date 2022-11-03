@@ -1,0 +1,56 @@
+{% extends 'main.html' %}
+
+{% block body %}
+<style>
+    a{
+        text-decoration: none;
+    }
+</style>
+
+
+
+
+<div class="form_box">
+
+
+    
+
+
+    
+    <form method="POST" action ="">
+    {% csrf_token %}
+    
+    <div class="mb-3">
+        <label for="exampleInputEmail1"  class="form-label">Room ID</label>
+      <input type="text" name="room_id" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Room Password</label>
+        <input type="password" name="roomPassword" class="form-control" id="exampleInputPassword1">
+    </div>
+   
+    <button type="submit" class="btn btn-outline-success  button-css">Join Room</button>
+</form>
+<a href="{{request.META.HTTP_REFERER}}">Go Back</a> 
+{% comment %} <a href="{{request.META.HTTP_REFERER}}" class="btn  my-2 btn-info stretched-link">Go Back</a> {% endcomment %}
+
+
+
+
+
+<div class="card my-3">
+    <h6 class="card-header">Instructions</h6>
+    <div class="card-body">
+      
+      <p class="card-text fs-6 ">After joining Room search with id or click any room and inside you will find all rooms you are joined.</p>
+     
+    </div>
+  </div>
+
+
+</div>
+
+
+
+{% endblock body %}

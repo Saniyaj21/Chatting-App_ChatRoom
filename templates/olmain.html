@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Room</title>
+    <link rel="stylesheet" href="style/headerStyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            background: transparent;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border: 1px solid #07855b;
+            background: #07855b;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #066042;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        #header {
+            background-color: #006040;
+            color: #fff;
+            display: flex;
+            width: 100%;
+            padding: 0px 10px;
+            font-family: sans-serif !important;
+            align-items: center;
+            justify-content: flex-start;
+            position: fixed;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            box-shadow: 0px 0px 3px #54ad8f;
+            z-index: 100000000000000;
+            height: 64px;
+        }
+
+        #header #logo {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bolder;
+            font-size: 22px;
+            left: 5px;
+            font-family: 'Poppins', sans-serif !important;
+            position: relative;
+            margin: 15px;
+        }
+
+        #header #menu {
+            width: auto;
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-left: 50px;
+        }
+
+        #header #menu li {
+            list-style: none;
+            margin: 0px 10px;
+            padding: 5px 15px;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            position: relative;
+        }
+
+        #header #menu li::after {
+            content: '';
+            width: 0%;
+            background-color: #54ad8f;
+            height: 3px;
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            transition: 0.5s;
+        }
+
+        #header #menu li:hover:after {
+            width: 100%;
+        }
+
+        #header #menu li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        #header #menu li a:hover {
+            color: #54ad8f;
+        }
+
+
+        #header #profile {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 50%;
+            background-color: #54ad8f;
+            background-image: url(avatarDefault.png);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            float: right;
+            right: 15px;
+            cursor: pointer;
+            /* box-shadow: 0px 0px 3px #e4f9f2; */
+            /* margin-left: 60px;
+            margin-right: 5px; */
+        }
+
+        #header #profile #showProfile {
+            display: none;
+        }
+
+        #header #profile:hover #showProfile {
+            width: 250px;
+            position: absolute;
+            background-color: #07855b;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            top: 15px;
+            right: 45px;
+            padding: 15px;
+            animation: leftIn 0.5s;
+            align-items: center;
+            border: 2px solid #006040;
+            border-radius: 10px 0px 10px 10px;
+            box-shadow: 0px 0px 20px 3px #006040;
+        }
+
+        #header #profile #showProfile #dp {
+            width: 150px;
+            height: 150px;
+            border: 5px solid #006040;
+            border-radius: 50%;
+            position: relative;
+            margin: 0px 0px 15px 0px;
+            transition: 0.5s;
+        }
+
+        #header #profile #showProfile #userName {
+            color: #fff;
+            font-size: 20px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            font-family: 'Courier New', Courier, monospace !important;
+        }
+
+        #header #profile #showProfile #colMenu {
+            list-style: none;
+            font-size: 15px;
+            width: 100%;
+            /* background-color: #b6b6b6; */
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        #header #profile #showProfile #colMenu #colMenuLink {
+            color: #fcfcfc;
+            text-decoration: none;
+            background-color: transparent;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #header #profile #showProfile #colMenu #colMenuLink:hover {
+            color: #89f9d4;
+        }
+
+        #header #profile #showProfile #colMenu #colMenuItem {
+            width: 100%;
+            padding: 3px;
+            margin: 5px;
+            background-color: #07855b;
+            border: 2px solid transparent;
+            border-bottom: 2px solid #f2fffb;
+            outline: none;
+            border-radius: 5px;
+        }
+
+        #header #profile #showProfile #colMenu #colMenuItem:hover {
+            border-bottom: 2px solid #89f9d4;
+        }
+
+
+
+
+        @keyframes leftIn {
+            0% {
+                /* height: 0px; */
+                width: 0px;
+                opacity: 0;
+            }
+
+            100% {
+                /* height: auto; */
+                width: 250px;
+                opacity: 1;
+            }
+        }
+
+
+
+
+        #containerLeft {
+            height: 92vh;
+            background-color: #006040;
+            width: 30%;
+            position: fixed;
+            left: 0;
+            top: 64px;
+            padding: 5px 0px;
+            /* overflow: hidden; */
+            /* overflow-y: scroll; */
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        #containerLeft #search {
+            position: relative;
+            width: 100%;
+            height: auto;
+            /* background: #fff; */
+            border: none;
+            color: #fcfcfc;
+            /* margin-right: 50px; */
+        }
+
+        #containerLeft #search #formSearch {
+            width: auto;
+            height: auto;
+        }
+
+
+        #containerLeft #search #formSearch #searchBox {
+            width: 250px;
+            height: 40px;
+            border: none;
+            border-bottom: 3px solid #54ad8f;
+            margin-left: 50px;
+            outline: none;
+            background-color: transparent;
+            color: #fcfcfc;
+            padding: 10px 5px;
+            padding-right: 25px;
+            font-size: 18px;
+            position: relative;
+        }
+
+        #containerLeft #search #formSearch #resetBtn {
+            width: 25px;
+            height: 25px;
+            padding: 5px;
+            font-size: 20px;
+            background-color: transparent;
+            outline: none;
+            cursor: pointer;
+            border: none;
+            color: #b6b6b6;
+            position: relative;
+            left: -28px;
+            margin: 0;
+        }
+
+        #containerLeft #search #formSearch #resetBtn:hover {
+            color: #ff8888;
+        }
+
+        #containerLeft #search #formSearch #searchBtn {
+            width: 40px;
+            align-items: center;
+            justify-content: center;
+            padding: auto;
+            height: 40px;
+            background-color: #54ad8f;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            margin-left: -28px;
+            font-size: 18px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        #containerLeft #search #formSearch #searchBtn:hover {
+            background-color: #07855b;
+        }
+
+        #containerLeft #search #formSearch #searchBox::placeholder {
+            color: #b6b6b6;
+        }
+
+        #containerLeft #roomType {
+            width: 100%;
+            /* background-color: #b6b6b6; */
+            padding: 5px;
+            margin-top: 3px;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+
+        #containerLeft #roomType button {
+            background-color: #07855b;
+            width: 40%;
+            height: 38px;
+            border: none;
+            border-radius: 10px;
+            outline: none;
+            transition: 0.5s;
+        }
+
+        #containerLeft #roomType button:hover {
+            background-color: #179f72;
+            /* border: 2px solid #07855b; */
+            border-radius: 15px;
+            box-shadow: 0px 0px 3px #07855b;
+        }
+
+        #containerLeft #roomType button a {
+            color: #f2fffb;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        #containerLeft #roomLists {
+            top: 93px;
+            /* background-color: #f2fffb; */
+            position: relative;
+            width: 95%;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            left: 50%;
+            transform: translateX(-50%);
+            overflow: hidden;
+            overflow-y: scroll;
+            height: 98%;
+            border: none;
+            border-radius: 15px;
+            bottom: 0;
+        }
+
+
+        #containerLeft #roomLists #roomDetailsBoxOut{
+            width: 100%;
+            background-color: #07855b;
+            height: 60px;
+            border: none;
+            border-radius: 15px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+
+        #containerLeft #roomLists #roomDetailsBox {
+            width: 100%;
+            background-color: #07855b;
+            height: 60px;
+            border: none;
+            border-radius: 15px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        #containerLeft #roomLists #roomDetailsBox img {
+            height: 50px;
+            width: 50px;
+            margin-left: 15px;
+            margin-right: 8px;
+            top: 50%;
+            /* transform: translateY(-50%); */
+            border: none;
+            border-radius: 50%;
+        }
+
+        #containerLeft #roomLists #roomDetailsBox #roomDetails {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            /* width: 77%; */
+            align-items: flex-start;
+            justify-content: center;
+            overflow-x: hidden;
+            border: none;
+            border-radius: 10px;
+            padding-left: 10px;
+            color: #fff;
+            background-color: #07855b;
+            width: 100% !important;
+        }
+
+        #containerLeft #roomLists #roomDetailsBox #roomDetails #roomName {
+            font-size: 18px;
+            font-family: poppins !important;
+            font-weight: 500;
+        }
+
+        #containerLeft #roomLists #roomDetailsBox #roomDetails #chatDetails {
+            font-size: 13px;
+            font-family: poppins !important;
+            font-weight: 200;
+        }
+
+        #roomListsA {
+            text-decoration: none;
+            width: 95% !important;
+        }
+
+        #containerLeft #roomLists #roomDetailsBoxOut #threeDotForMenu{
+            background-color: transparent;
+            columns: #ddd;
+            font-size: 18px;
+            outline: none;
+            border: none;
+            display: none;
+            transition: 0.5s;
+            /* left: -20px; */
+            right: 20px;
+            position: relative;
+        }
+
+        #containerLeft #roomLists #roomDetailsBoxOut:hover #threeDotForMenu{
+            display: block;
+        }
+
+        #containerLeft #roomLists #roomDetailsBoxOut #threeDotForMenu a{
+            color: #f1f1f1;
+            text-decoration: none;
+            transition: 0.5s;
+        }
+
+        #containerLeft #roomLists #roomDetailsBoxOut #threeDotForMenu a:hover{
+            color: #e07e7e;
+        }
+
+
+        #containerRight {
+            position: fixed;
+            width: 70%;
+            height: 92vh;
+            background-color: #b6b6b6;
+            right: 0;
+            top: 64px;
+            /* overflow: hidden;
+            overflow-y: scroll; */
+        }
+    </style>
+</head>
+
+<body>
+    <header id="header">
+        <a href="#" id="logo" name="logo">ChatRoom</a>
+        <ul id="menu">
+            {% comment %} <li><a href="#"><i class="fa-solid fa-house"></i> Home</a></li>
+            <li><a href="#"><i class="fa-brands fa-rocketchat"></i> Chat</a></li>
+            <li><a href="#"><i class="fa-solid fa-gamepad"></i> Games</a></li>
+            <li><a href="#"><i class="fa-solid fa-code"></i> Devolopers</a></li>
+            <li><a href="#"><i class="fa-solid fa-comment-dots"></i> Feedback</a></li> {% endcomment %}
+            <li><a href="/"><i class="fa-solid fa-house"></i> Home</a></li>
+      <li><a href="{% url 'home' %}"><i class="fa-brands fa-rocketchat"></i> Chat</a></li>
+      <li><a href="{% url 'games' %}"><i class="fa-solid fa-gamepad"></i> Games</a></li>
+      <li><a href="{% url 'devolopers' %}"><i class="fa-solid fa-code"></i> Devolopers</a></li>
+      <li><a href="{% url 'feedback' %}"><i class="fa-solid fa-comment-dots"></i> Feedback</a></li>
+        </ul>
+
+        <div id="profile" class="profile" title="profile">
+            <div class="showProfile" id="showProfile">
+                <img src="avatarDefault.png" alt="DP" id="dp">
+                <span id="userName">User Name </span>
+                <ul class="colMenu" id="colMenu">
+                    <a href="#" id="colMenuLink">
+                        <li id="colMenuItem" class="colMenuItem"><i class="fa-solid fa-
+                        fa-user" style="margin-right: 5px !important;"></i> Profile</li>
+                    </a>
+                    <a href="#">
+                        <li id="colMenuItem" class="colMenuItem"><a href="#" id="colMenuLink"><i class="fa-solid fa-
+                        fa-right-to-bracket" style="margin-right: 5px !important;"></i> Log in</li>
+                    </a>
+                </ul>
+            </div>
+        </div>
+
+    </header>
+
+
+
+
+   
+
+    <div id="containerLeft">
+
+        <div style="position: fixed;width: 28.8%;z-index: 99999;">
+            <div class="search" id="search">
+              
+              
+              <form action="{% url 'home' %}" method="GET" id="formSearch">
+                    <input type="text" name="q" placeholder="Enter Room Name or ID ..." id="searchBox">
+                    <button type="reset" id="resetBtn"><i class="fa-solid fa-circle-xmark"></i></button>
+                    <button type="submit" id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+
+
+
+
+            </div>
+            <div id="roomType">
+                <button><a href="#"><i class="fa-solid fa-pen"></i> Create Room</a></button>
+                <button style=" margin-left: 15px;"><a href="#"><i class="fa-solid fa-user-plus"></i> Join
+                        Room</a></button>
+            </div>
+        </div>
+
+
+        <div id="roomLists">
+            <div id="roomDetailsBoxOut">
+                <a href="#" id="roomListsA">
+                    <div id="roomDetailsBox">
+                        <img src="avatarDefault.png" alt="Icon">
+                        <div id="roomDetails">
+                            <span id="roomName">Room Name</span>
+                            <span id="chatDetails">Last Chat Details</span>
+                        </div>
+                    </div>
+                </a>
+                <button id="threeDotForMenu"><a href="#"><i class="fa-solid fa-trash"></i></a></button>
+                <!-- <div id="showEntireBtn"></div> -->
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <div id="containerRight">
+
+    </div>
+
+
+
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+  <header id="header">
+    <a href="/" id="logo" name="logo">ChatRoom</a>
+    <ul id="menu">
+      
+      <li><a href="#">
+        <!-- backend   -->
+        
+        </a></li>
+
+    </ul>
+    <div id="profile" class="profile">
+      <div class="showProfile" id="showProfile">
+        <ul class="colMenu" id="colMenu">
+          <!-- <img src="" alt="DP" id="dp"> -->
+          <li id="colMenuItem" class="colMenuItem"> HI {{request.user | upper}}</li>
+
+          
+          {% if request.user.is_authenticated %}
+
+          <li id="colMenuItem" class="colMenuItem">
+            <a class="nav-link" href="{% url 'logout'%}">Logout</a>
+          </li>
+          {% else %}
+
+          <li id="colMenuItem" class="colMenuItem">
+            <a class="nav-link" href="{% url 'login'%}">Login</a>
+          </li>
+          {%endif %}
+          <!-- <li id="colMenuItem" class="colMenuItem">Log in</li> -->
+          <!-- <li id="colMenuItem" class="colMenuItem">Show Profile</li> -->
+        </ul>
+      </div>
+    </div>
+
+  </header>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% block body %}
+
+
+{% endblock body %}

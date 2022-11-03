@@ -1,0 +1,40 @@
+{% extends 'main.html' %}
+
+{% block body %}
+<style>
+  body {
+    background-color: rgba(7, 131, 90, 0.18);
+   
+    
+}
+</style>
+
+<div class="form_box">
+    <h4 class="text-success my-3">Edit Profile</h4>
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Full Name</label>
+        <input type="text" name="fullName" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Email</label>
+        <input type="email" name="email" class="form-control" id="exampleInputPassword1">
+      </div>
+
+    {% comment %} <input type="text" name="fullName" id="" placeholder="Full Name">
+    <input type="email" name="email" id="" placeholder="Email"> {% endcomment %}
+    {% comment %} <input type="file" name="dp" id=""> {% endcomment %}
+    <div class="mb-3">
+        <label for="formFileSm" class="form-label">Select Your Profile Picture ( 1 : 1 size recomanded)</label>
+        <input class="form-control form-control-sm"  name="dp"  id="formFileSm" type="file">
+      </div>
+
+    <input type="submit" class="btn btn-outline-success button-css my-5" value="Save">
+</form>
+</div>
+
+{% endblock body %}

@@ -1,0 +1,65 @@
+{% extends 'main.html' %}
+
+{% block body%}
+
+<style>
+.container{
+    
+    position: relative;
+    height: 100px;
+
+}
+.container p{
+    text-align: center;
+    width: 100%;
+    position: relative;
+    top: 10px;
+}
+.box{
+    text-align: center;
+    width: 100%;
+    position: relative;
+    top: 20px;
+
+}
+
+.box a{
+    text-decoration: none;
+    color: green;
+    margin: 0px 5px;
+    font-weight: 500;
+   
+}
+.box input{
+    color: red;
+    border: 0px;
+    background: transparent;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0px 5px;
+    cursor: pointer;
+}
+
+.box a:hover{
+    color: black;
+}
+.box input:hover{
+    color: black;
+}
+.hilight{
+    background:yellow;
+}
+</style>
+
+
+<div class = "container">
+    <p>Are You sure you want to delete <span class="hilight"> " {{obj}} "</span> ? </p>
+    <form action="" method="POST" class = "box">
+        {% csrf_token %}
+        
+        <a href="{{request.META.HTTP_REFERER}}"><button class="btn btn-outline-success btn-sm">Go Back</button></a>
+      
+        <button type="submit" class="btn btn-outline-danger btn-sm">Confirm</button>
+    </form>
+</div>
+{% endblock body%}

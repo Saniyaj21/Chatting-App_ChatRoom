@@ -1,0 +1,57 @@
+{% extends 'main.html' %}
+
+{% block body %}
+<style>
+    body {
+        background-color: rgba(7, 131, 90, 0.18);
+       
+        
+    }
+    .form_box{
+        width: 50%;
+        margin-left: 24%;
+        margin-top: 50px;
+    }
+    .room-page-title{
+        text-align: center;
+        margin-top: 40px;
+    }
+</style>
+
+<div class="form_box">
+<h3 class="room-page-title text-success">Submit Your Feedback</h3>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Your Feedback</label>
+      <input type="text" name="feedb" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      <div id="emailHelp" class="form-text">Your feedback helps us to inprove our application.</div>
+    </div>
+   
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} <h2> feedback page </h2>
+
+<form action="" method="POST">
+    {% csrf_token %}
+
+<input type="text" name="feedb" placeholder="Enter your feedback ...">
+
+<input type="submit" value="Submit">
+
+</form> {% endcomment %}
+
+{% endblock body %}

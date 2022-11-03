@@ -1,0 +1,77 @@
+
+
+<body>
+  <header id="header">
+    <a href="#" id="logo" name="logo">ChatRoom</a>
+    <ul id="menu">
+      <li><a href="#"><i class="fa-solid fa-house"></i> Home</a></li>
+      <li><a href="#"><i class="fa-brands fa-rocketchat"></i> Chat</a></li>
+      <li><a href="#"><i class="fa-solid fa-gamepad"></i> Games</a></li>
+      <li><a href="#"><i class="fa-solid fa-code"></i> Devolopers</a></li>
+      <li><a href="#"><i class="fa-solid fa-comment-dots"></i> Feedback</a></li>
+
+    </ul>
+    <div id="profile" class="profile">
+      <div class="showProfile" id="showProfile">
+        <ul class="colMenu" id="colMenu">
+          <!-- <img src="" alt="DP" id="dp"> -->
+          <li id="colMenuItem" class="colMenuItem">Show Profile</li>
+          <li id="colMenuItem" class="colMenuItem">Log in</li>
+          <!-- <li id="colMenuItem" class="colMenuItem">Show Profile</li> -->
+        </ul>
+      </div>
+    </div>
+
+  </header>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2> this is Navbar</h2>
+
+{% if request.user.is_authenticated %}
+
+<li class="nav-item">
+  <a class="nav-link" href="{% url 'logout'%}">Logout</a>
+
+
+
+  
+</li>
+{% else %}
+
+<li class="nav-item">
+  <a class="nav-link" href="{% url 'login'%}">Login</a>
+</li>
+{%endif %}
+
+
+<form action="{% url 'home' %}" method="GET">
+  <input type="text" name="q" placeholder="Search room...">
+  <input type="submit" value="Search">
+</form>
+
+Hi <span class="hilight">{{request.user | upper}}</span>
+<hr>
+
+<style>
+  .hilight {
+    color: red;
+  }
+</style>
+{% block body %}
+
+
+{% endblock body %}

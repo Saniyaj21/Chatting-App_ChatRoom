@@ -1,0 +1,172 @@
+{% extends 'main.html' %}
+
+
+
+{% block body %}
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+body {
+    background-color: rgba(7, 131, 90, 0.18);
+   
+    
+}
+
+.mainSection {
+    background-color: transparent !important;
+    color: #095c09;
+    align-items: center;
+    position: relative;
+    left: 25%;
+    top: 30px;
+    width: 50%;
+    height: 70vh;
+    border: none;
+    border-radius: 15px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.dpProfile {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: #006040;
+    border: 5px solid #dcf8c6;
+    box-shadow: 1px 1px 5px #006040;
+}
+
+.profileName{
+    font-size: 22px;
+    font-weight: 500;
+    color: #006040;
+    font-family: Poppins !important;
+    margin-top: 10px;
+    padding: 0px 10px;
+    text-transform: capitalize;
+}
+.profileContactInfo{
+    font-size: 22px;
+    font-style: normal;
+    margin-top: 5px;
+    padding: 0px 10px 10px;
+    font-weight: 300;
+    text-transform: lowercase;
+}
+.settingsBtn{
+    right: 0;
+    position: absolute;
+    background-color: #006040;
+    padding: 7px;
+    border: none;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.settingsBtn a{
+    color: rgb(240, 248, 255);
+    text-decoration: none;
+    font-size: 13px;
+}
+.settingsBtn a i{
+    font-size: 18px;
+    transition: 0.2s;
+}
+
+.settingsBtn:hover i{
+    transform: rotate(45deg);
+}
+</style>
+
+
+
+
+
+<section class="mainSection">
+
+    {% if sameUser == True%}
+<div class="settingsBtn"><a href="{% url 'edit_profile' request.user.id %}"><i class="fa-solid fa-gear"></i> Edit Profile</a></div>
+{% endif %}
+
+<img src="{{dp.url}}" alt="" class="dpProfile">
+
+<div class="profileName">
+    {{name}}
+</div>
+<div class="profileContactInfo">
+    {{email}}
+</div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} 
+
+
+
+
+
+<style>
+    body{
+
+        background-color: aqua;
+    }
+
+    h3{
+        text-align: center;
+        width: 100%;
+    }
+  
+    #pic{
+        height: 160px;
+        width: 90px;
+        
+    } {% endcomment %}
+
+{% comment %} 
+</style>
+{% if sameUser == True%}
+<a href="{% url 'edit_profile' request.user.id %}">Edit Profile</a>
+{% endif %}
+<h3>profile name</h3>
+<h3>{{name}}</h3>
+
+   
+
+
+<div class="image">
+    
+     <img id="pic" src="{{dp.url}}" alt=""> 
+</div>
+<h3>{{email}}</h3> {% endcomment %}
+
+
+
+
+
+{% endblock body %}
